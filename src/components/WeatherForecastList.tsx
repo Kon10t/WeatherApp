@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/weatherStyle.css';
+import './weatherStyle.css';
 import WeatherForecastCard from './WeatherForecastCards';
 
 export default function WeatherForecastList() {

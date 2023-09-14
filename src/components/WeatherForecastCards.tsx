@@ -1,49 +1,57 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, FC } from 'react';
 import WeatherForecastCard from './WeatherForecastCard';
 
-import '../css/weatherStyle.css';
+import './weatherStyle.css';
 import { useAppDispatch } from '../hook';
-import { WeatherDataProps } from '../commonTypes';
-import { setWeatherForecastData, fetchData } from '../redux/weatherSlice';
-
-function api(url: string) {
-  return fetch(url)
-    .then(res => {
-      if (!res.ok) {
-        throw new Error(res.statusText);
-      }
-      return res.json()
-    })
-}
+import { fetchForecastWeather } from '../redux/weatherSlice';
+import { Button } from 'semantic-ui-react';
 
 export default function WeatherForecastCards() {
+  const [slideValue, setSlideValue] = useState(0);
+
   const dispatch = useAppDispatch();
 
   const APIkey: string = '124f4869ee7d90fb1d1ca27b7455d472';
-  const weatherApiUrl: string = `https://api.openweathermap.org/data/2.5/weather?lat=55.27&lon=37.84&lang=ru&appid=${APIkey}`;
-  // const [weatherData, setWeatherData] = useState<WeatherDataProps[]>([]);
-
-  useEffect(() => {
-    // const fetchData = async () => {
-      // try {
-        // const data = await api(weatherApiUrl);
-        // setWeatherData(data);
-        dispatch(fetchData());
-        // console.log(data);
-      // } catch (error) {
-      //   console.error('Ошибка при получении данных', error);
-      // }
-    // }
-
-    // fetchData();
-    // console.log('legitCheck');
-  }, [dispatch]);
+  const weatherApiUrl: string = `https://api.openweathermap.org/data/2.5/forecast?lat=55.27&lon=37.84&lang=ru&appid=${APIkey}`;
   
+  useEffect(() => {
+    dispatch(fetchForecastWeather());
+  }, [dispatch]);
+
+  let data = [1,2,3,4,5,6,7,8,9,0];
+
+  const changeSlide = (value: number) => {
+    setSlideValue(prevValue => prevValue - value);
+  }
+
   return (
-    <div className='forecast-slider'
-    style={{ transform: `translateX()` }}>
-      {/* {`weatherData: ${JSON.stringify(weatherData)}`} */}
-      <WeatherForecastCard />
-    </div>
+    <>
+      <div className='slider-btns'>
+        { slideValue > 0 ?
+            <ButtonLeft changeSlide={changeSlide} /> :
+            <ButtonRight changeSlide={changeSlide} />
+        }
+      </div>
+      <div className='forecast-slider'
+        style={{ transform: `translateX(-${slideValue}%)` }}>
+        <div className='slider-card'>
+          {data.map(() => <WeatherForecastCard />)}
+        </div>
+      </div>
+    </>
+  )
+}
+
+const ButtonLeft: React.FC<{ changeSlide: any }> = ({ changeSlide }) => {
+
+  return (
+    <input type="button" value="prev" className='slider-button-left' onClick={() => changeSlide(100)}/>
+  )
+}
+
+const ButtonRight: React.FC<{ changeSlide: any }> = ({ changeSlide }) => {
+
+  return (
+    <input type="button" value="next" className='slider-button-right' onClick={() => changeSlide( (-100) )}/>
   )
 }

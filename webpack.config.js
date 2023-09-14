@@ -1,20 +1,25 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { WebpackPluginServe } = require('webpack-plugin-serve');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3002;
 
 module.exports = {
   mode: 'development',
-  entry: ['./src/index.js','webpack-plugin-serve/client'],
+  entry: ['./src/index.js'],
   output: {
     filename: 'bundle.[fullhash].js',
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js'],
+    extensions: ['.tsx', '.ts', '.js'],
   },
   devtool: 'inline-source-map',
   module: {
     rules: [
+      {
+        test: /\.svg$/,
+        use: ['file-loader']
+      },
       {
         test: /\.(js|ts|tsx)$/,
         exclude: /node-modules/,
@@ -22,30 +27,15 @@ module.exports = {
       },
 
       {
-        test: /\.css$/,
+        test: /\.css$/i,
         use: [
-          {
-            loader: 'style-loader',
-            options: {
-              esModule: true,
-            },
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              esModule: true,
-              modules: {
-                mode: 'local',
-                exportLocalsConvention: 'camelCaseOnly',
-                namedExport: true,
-              },
-            },
-          },
+          MiniCssExtractPlugin.loader, "css-loader"
         ],
       },
     ],
   },
   plugins: [
+    new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
       template: 'public/index.html',
       favicon: 'public/favicon.ico'
@@ -53,9 +43,9 @@ module.exports = {
     new WebpackPluginServe({
       host: 'localhost',
       port: port,
-      historyFallback: false,
+      historyFallback: true,
       open: true,
-      liveReload: true,
+      liveReload: false,
       hmr: true,
       static: './dist',
     }),

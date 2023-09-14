@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+body {
+  margin: 0px;
+  background-color: #115abb;
+  background-image: url("../Mountion.webp");
+  background-size: 1444px;
+  font-family: 'Roboto Slab', serif;
+  color: white;
+}
+
+@media (min-width: 1920px) {
+  body {
+    background-size: 1920px;
+    background-repeat: no-repeat;
+  }
+}
+
+.rama {
+  margin: 0px 400px 0px 400px;
+  height: 100%;
+}
+
+/********************************************************************
+//////////////////    WeatherForecast //////////////////////////////
+******************************************************************/
+
+.swipe-symbol {
+  position: absolute;
+  bottom: 0;
+}
+
+.forecast-wrapper {
+  /* display: flex;
+  flex-direction: row; */
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.forecast-slider {
+  display: flex;
+  height: 100%;
+  margin: auto;
+  transition: all .6s ease-in;
+}
+
+.slider-card {
+  display: flex;
+  flex-direction: row;
+}
+
+.slider-btns {
+  position: absolute;
+  z-index: 999;
+  width: 1120px;
+
+    .slider-button-right {
+      position: absolute;
+      right: 0px;
+      top: 40%;
+      z-index: 999;
+    }
+    
+    .slider-button-left {
+      position: absolute;
+      z-index: 999;
+    }
+}
+
+
+
+
+.forecast-slide {
+  position: relative;
+  backdrop-filter: blur(3px);
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  width: 150px;
+  margin: 0px 5px 0px 5px;
+}
+
+.card-title {
+  display: flex;
+  flex-direction: row;
+}
+
+.card-left {
+  display: flex;
+  flex-direction: row;
+}
+
+.card-left-temp {
+  display: flex;
+  flex-direction: column;
+}
+
+/********************************************************************
+//////////////////////////  WeatherToday  //////////////////////////
+******************************************************************/
+
+.current-weather {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  width: 55%;
+  backdrop-filter: blur(3px);
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+
+}
+
+@media (min-width: 1920px) {
+  .current-weather {
+    width: 25%;
+  }
+}
+
+.top-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.top-info-right {
+
+}
+
+.temp {
+  display: flex;
+  flex-direction: row;
+}
+
+.temp-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+  .temp-right p {
+    margin: 0px;    
+  }
+
+  .temp-right-top {
+    font-size: 40px;
+  }
+
+  .temp-right-bottom {
+    font-size: 25px;
+  }
+
+.temp-left {
+  width: 100%;
+  height: 100%;
+}
