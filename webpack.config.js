@@ -1,19 +1,20 @@
+const path = require('path');
+const webpack = require('webpack');
+const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { WebpackPluginServe } = require('webpack-plugin-serve');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const port = process.env.PORT || 3002;
+const isDevelopment = process.env.NODE_ENV !== 'production';
 
 module.exports = {
-  mode: 'development',
-  entry: ['./src/index.js'],
-  output: {
-    filename: 'bundle.[fullhash].js',
+  mode: isDevelopment ? 'development' : 'production',
+  devServer: {
+    port: 3002,
+    client: { overlay: false },
   },
-  resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+  entry: {
+    main: './src/index.js',
   },
-  devtool: 'inline-source-map',
   module: {
     rules: [
       {
@@ -25,31 +26,29 @@ module.exports = {
         exclude: /node-modules/,
         use: ['babel-loader'],
       },
-
       {
         test: /\.css$/i,
         use: [
           MiniCssExtractPlugin.loader, "css-loader"
         ],
       },
+      {
+        test: /\.(tsx|js|ts|jsx)?$/,
+        include: path.join(__dirname, 'src'),
+        use: 'babel-loader',
+      },
     ],
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    isDevelopment && new ReactRefreshPlugin(),
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
       template: 'public/index.html',
       favicon: 'public/favicon.ico'
     }),
-    new WebpackPluginServe({
-      host: 'localhost',
-      port: port,
-      historyFallback: true,
-      open: true,
-      liveReload: false,
-      hmr: true,
-      static: './dist',
-    }),
-  ],
-  watch: true,
+  ].filter(Boolean),
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
+  },
 };
-

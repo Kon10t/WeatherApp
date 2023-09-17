@@ -14,6 +14,10 @@ body {
     background-size: 1920px;
     background-repeat: no-repeat;
   }
+
+  .current-weather-icon {
+    width: 150px;
+  }
 }
 
 .rama {
@@ -40,9 +44,10 @@ body {
 
 .forecast-slider {
   display: flex;
-  height: 100%;
+  height: 74%;
   margin: auto;
   transition: all .6s ease-in;
+  cursor: pointer;
 }
 
 .slider-card {
@@ -76,7 +81,7 @@ body {
   backdrop-filter: blur(3px);
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 3px;
-  width: 150px;
+  width: 190px;
   margin: 0px 5px 0px 5px;
 }
 
@@ -85,14 +90,23 @@ body {
   flex-direction: row;
 }
 
-.card-left {
+.card-bottom {
   display: flex;
   flex-direction: row;
+  height: auto;
 }
 
-.card-left-temp {
+.card-bottom-temp {
   display: flex;
   flex-direction: column;
+}
+
+.card-bottom-temp p {
+  margin: 0px;
+}
+
+.click {
+  width: 200%;
 }
 
 /********************************************************************
@@ -103,7 +117,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: auto;
+  /* margin: auto; */
   width: 55%;
   backdrop-filter: blur(3px);
   background-color: rgba(255, 255, 255, 0.1);
@@ -114,17 +128,22 @@ body {
 
 @media (min-width: 1920px) {
   .current-weather {
-    width: 25%;
+    width: 55%;
   }
 }
 
 .top-info {
   display: flex;
   flex-direction: column;
+  margin-left: 1rem;
 }
 
-.top-info-right {
+.top-infoCurrentWeather {
 
+}
+
+.top-infoLastUpd {
+  margin-left: 1rem;
 }
 
 .temp {
@@ -141,15 +160,38 @@ body {
     margin: 0px;    
   }
 
-  .temp-right-top {
+.temp-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.temp-center p {
+  margin: 0;
+}
+
+  .temp-center-temp {
     font-size: 40px;
   }
 
-  .temp-right-bottom {
+  .temp-center-condition {
     font-size: 25px;
   }
 
 .temp-left {
-  width: 100%;
-  height: 100%;
+  margin-left: .7rem;
+}
+
+.bottom-additional-info {
+  display: flex;
+  flex-direction: row;
+}
+
+.bottom-additional-info > p {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.current-weather-icon {
+  height: auto;
 }

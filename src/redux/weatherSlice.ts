@@ -15,6 +15,8 @@ type TForecastData = {
     last_updated: string,
     precip_in: number,
     precip_mm: number,
+    pressure_in: number,
+    pressure_mb: number,
     temp_c: number,
     temp_f: number,
     uv: number,
@@ -121,7 +123,7 @@ const APIkey: string = '1ffffbc4df8146f7a53122007231209';
 const weatherForecastUrl: string = `http://api.weatherapi.com/v1/forecast.json?key=${APIkey}&q=55.27,37.84&days=3&lang=ru`;
 
 export const fetchForecastWeather = createAsyncThunk(
-  'weather/fetchCurrentWeather',
+  'weather/fetchForecastWeather',
   async () => {
     const forecastRes = await fetch(weatherForecastUrl)
     const data = await forecastRes.json();

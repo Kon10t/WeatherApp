@@ -18,8 +18,6 @@ export default function WeatherForecastCards() {
     dispatch(fetchForecastWeather());
   }, [dispatch]);
 
-  let data = [1,2,3,4,5,6,7,8,9,0];
-
   const changeSlide = (value: number) => {
     setSlideValue(prevValue => prevValue - value);
   }
@@ -35,7 +33,7 @@ export default function WeatherForecastCards() {
       <div className='forecast-slider'
         style={{ transform: `translateX(-${slideValue}%)` }}>
         <div className='slider-card'>
-          {data.map(() => <WeatherForecastCard />)}
+          <WeatherForecastCard />
         </div>
       </div>
     </>

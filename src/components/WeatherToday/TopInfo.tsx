@@ -5,12 +5,12 @@ export default function TopInfo() {
 
   const { WeatherForecastData } = useAppSelector(state => state.weather);
 
+  let lastUpd = WeatherForecastData?.current.last_updated.split(' ')[1];
+
   return (
     <div className="top-info">
-      <div className="top-info-right">
-        <p>Текущая погода</p>
-        <p>{WeatherForecastData?.current.last_updated}</p>
-      </div>
+        <p className="top-infoCurrentWeather">Текущая погода</p>
+        <p className="top-infoLastUpd">{lastUpd && lastUpd}</p>
     </div>
   )
 }
